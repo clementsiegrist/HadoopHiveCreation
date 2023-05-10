@@ -159,8 +159,8 @@ Once you have finished exploring the IMDB database, you may want to clean up you
 
 If you encounter any issues while setting up or using the IMDB database, please consult the following resources:
 
-    [Hadoop documentation](https://hadoop.apache.org/docs/stable/)
-    [Hive](https://cwiki.apache.org/confluence/display/Hive/Home)
+[Hadoop documentation](https://hadoop.apache.org/docs/stable/)
+[Hive](https://cwiki.apache.org/confluence/display/Hive/Home)
 
 For additional help, you may also reach out to the community through forums such as Stack Overflow or the Apache Hive mailing list.
 Contributing
