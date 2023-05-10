@@ -167,6 +167,6 @@ Contributing
 
 Contributions to this project are welcome! If you have suggestions for improvements or encounter any issues, please open an issue or submit a pull request on the project's GitHub repository.
 
-##License
+## License
 
 This project is licensed under the MIT License. Please see the LICENSE file for more information.
