@@ -227,7 +227,7 @@ If you encounter any issues while setting up or using the IMDB database, please 
 
 ![Hadoop documentation](https://hadoop.apache.org/docs/stable/)
 
-![!Hive](https://cwiki.apache.org/confluence/display/Hive/Home)
+![Hive](https://cwiki.apache.org/confluence/display/Hive/Home)
 
 For additional help, you may also reach out to the community through forums such as Stack Overflow or the Apache Hive mailing list.
 Contributing
