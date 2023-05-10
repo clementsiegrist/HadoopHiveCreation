@@ -80,28 +80,43 @@ This project contains a Dockerfile and instructions for creating a Hadoop and Hi
   `primaryProfession ARRAY<STRING>,`
 
   `knownForTitles ARRAY<STRING>)` 
-  
+
   `ROW FORMAT DELIMITED`
+
 `FIELDS TERMINATED BY '\t'`
+
 `COLLECTION ITEMS TERMINATED BY ','`
+
 `STORED AS ORC;`
 
 `CREATE TABLE title_akas (`
+
   `titleId STRING,`
+
   `ordering INT,`
+
   `title STRING,`
+
   `region STRING,`
+
   `language STRING,`
+
   `types STRING,`
+
   `attributes STRING,`
+
   `isOriginalTitle BOOLEAN`
+
 `) ROW FORMAT DELIMITED`
+
 `FIELDS TERMINATED BY '\t'`
+
 `STORED AS ORC;`
 
 3. Load data into the created tables:
 
 `LOAD DATA INPATH '/imdb-data/name.basics.tsv' OVERWRITE INTO TABLE name_basics;`
+
 `LOAD DATA INPATH '/imdb-data/title.akas.tsv' OVERWRITE INTO TABLE title_akas;`
 
 ## Example Queries
@@ -109,50 +124,79 @@ This project contains a Dockerfile and instructions for creating a Hadoop and Hi
 1. Find the top 10 highest rated movies:
 
 `SELECT tb.primaryTitle, tr.averageRating, tr.numVotes`
+
 `FROM title_basics tb`
+
 `JOIN title_ratings tr ON tb.tconst = tr.tconst`
+
 `WHERE tb.titleType = 'movie'`
+
 `ORDER BY tr.averageRating DESC, tr.numVotes DESC`
+
 `LIMIT 10;`
 
 2. Find the main actors in "The Shawshank Redemption":
 
 `SELECT nb.primaryName`
+
 `FROM title_basics tb`
+
 `JOIN title_principals tp ON tb.tconst = tp.tconst`
+
 `JOIN name_basics nb ON tp.nconst = nb.nconst`
+
 `WHERE tb.primaryTitle = 'The Shawshank Redemption'`
+
 `AND tp.category IN ('actor', 'actress');`
 
 3. Find the 10 most prolific directors:
 
 `SELECT nb.primaryName, COUNT(DISTINCT tc.tconst) AS movie_count`
+
 `FROM name_basics nb`
+
 `JOIN title_crew tc ON nb.nconst = tc.director`
+
 `WHERE tc.tconst IN (SELECT tconst FROM title_basics WHERE titleType = 'movie')`
+
 `GROUP BY nb.primaryName`
+
 `ORDER BY movie_count DESC`
+
 `LIMIT 10;`
 
 4. Find the top 10 TV series with the most episodes:
 
 `SELECT tb.primaryTitle, COUNT(te.episode) AS episode_count`
+
 `FROM title_basics tb`
+
 `JOIN title_episode te ON tb.tconst = te.parentTconst`
+
 `WHERE tb.titleType = 'tvSeries'`
+
 `GROUP BY tb.primaryTitle`
+
 `ORDER BY episode_count DESC`
+
 `LIMIT 10;`
 
 5. Find the top 5 most famous actors/actresses born in 1990:
 
 `SELECT nb.primaryName, COUNT(tp.tconst) AS known_for_count`
+
 `FROM name_basics nb`
+
 `JOIN title_principals tp ON nb.nconst = tp.nconst`
+
 `WHERE nb.birthYear = 1990`
+
   `AND tp.category IN ('actor', 'actress')`
+
 `GROUP BY nb.primaryName`
+
 `ORDER BY known_for_count DESC`
+
 `LIMIT 5;`
 
 ## Cleanup
@@ -164,6 +208,7 @@ Once you have finished exploring the IMDB database, you may want to clean up you
 2. Stop and remove the Docker container:
 
 `docker stop hadoop-hive-imdb-container`
+
 `docker rm hadoop-hive-imdb-container`
 
 3. Optionally, remove the Docker image:
@@ -173,6 +218,7 @@ Once you have finished exploring the IMDB database, you may want to clean up you
 4. Delete the downloaded IMDB data files and HDFS directory:
 
 `rm name.basics.tsv title.akas.tsv title.basics.tsv title.crew.tsv title.episode.tsv title.principals.tsv title.ratings.tsv`
+
 `hadoop fs -rm -r /imdb-data`
 
 ## Troubleshooting
