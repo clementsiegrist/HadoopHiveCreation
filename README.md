@@ -15,11 +15,17 @@ This project contains a Dockerfile and instructions for creating a Hadoop and Hi
 3. To begin, download the IMDB data files: 
 
 `wget https://datasets.imdbws.com/name.basics.tsv.gz`
+
 `wget https://datasets.imdbws.com/title.akas.tsv.gz`
+
 `wget https://datasets.imdbws.com/title.basics.tsv.gz`
-`wget https://datasets.imdbws.com/title.crew.tsv.gz`                    
-`wget https://datasets.imdbws.com/title.episode.tsv.gz`    
+
+`wget https://datasets.imdbws.com/title.crew.tsv.gz`  
+
+`wget https://datasets.imdbws.com/title.episode.tsv.gz`   
+
 `wget https://datasets.imdbws.com/title.principals.tsv.gz`
+
 `wget https://datasets.imdbws.com/title.ratings.tsv.gz`
 
 4. Unzip the downloaded files:
@@ -33,11 +39,17 @@ This project contains a Dockerfile and instructions for creating a Hadoop and Hi
 6. Next, copy the uncompressed data files into HDFS:
 
 `hadoop fs -put name.basics.tsv /imdb-data/`
+
 `hadoop fs -put title.akas.tsv /imdb-data/`
+
 `hadoop fs -put title.basics.tsv /imdb-data/`
+
 `hadoop fs -put title.crew.tsv /imdb-data/`
+
 `hadoop fs -put title.episode.tsv /imdb-data/`
+
 `hadoop fs -put title.principals.tsv /imdb-data/`
+
 `hadoop fs -put title.ratings.tsv /imdb-data/`
 
 7. To connect to Hive, use the following command:
@@ -50,17 +62,25 @@ This project contains a Dockerfile and instructions for creating a Hadoop and Hi
 1. Create a database for the IMDB data:
 
 `CREATE DATABASE imdb;`
+
 `USE imdb`
 
 2. Create tables using the appropriate schemas and storage optimizations for each data file. Optimizations include using ORC compression for storage and selecting appropriate data types for each column.
 
 `CREATE TABLE name_basics (`
+
   `nconst STRING,`
+
   `primaryName STRING,`
+
   `birthYear INT,`
+
   `deathYear INT,`
+
   `primaryProfession ARRAY<STRING>,`
+
   `knownForTitles ARRAY<STRING>)` 
+  
   `ROW FORMAT DELIMITED`
 `FIELDS TERMINATED BY '\t'`
 `COLLECTION ITEMS TERMINATED BY ','`
@@ -159,8 +179,8 @@ Once you have finished exploring the IMDB database, you may want to clean up you
 
 If you encounter any issues while setting up or using the IMDB database, please consult the following resources:
 
-[Hadoop documentation](https://hadoop.apache.org/docs/stable/)
-[Hive](https://cwiki.apache.org/confluence/display/Hive/Home)
+![Hadoop documentation](https://hadoop.apache.org/docs/stable/)
+![!Hive](https://cwiki.apache.org/confluence/display/Hive/Home)
 
 For additional help, you may also reach out to the community through forums such as Stack Overflow or the Apache Hive mailing list.
 Contributing
